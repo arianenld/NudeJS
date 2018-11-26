@@ -1,0 +1,65 @@
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<body>
+    <!-- message html (hello world) -->
+    <div id="firstMessage">
+        {{ message }}
+    </div>
+    
+    <!-- message binding-->
+    <div id="app-2">
+        <span v-bind:title="message">
+          Hover your mouse over me for a few seconds
+          to see my dynamically bound title!
+        </span>
+    </div>
+
+    <!-- presence of element
+    basic true or false control-->
+    <div id="app-3">
+        <span v-if="seen">Now you see me</span>
+    </div>
+
+    <!-- passing of value galing sa array na nasa app.js-->
+    <div id="app-4">
+        <ul>
+            Hover your mouse to list
+            <span v-bind:title="message">
+                <li v-for="todo in todos">
+                    {{todo.text}}
+                </li>
+            </span>
+        </ul>
+    </div>
+
+    <!-- handling user input
+    1. user input
+    2. reverse after-->
+
+    <div id="app-5">
+        <p> {{ message}} </p>
+        <input v-model="message" placeholder="edit me">
+        <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+
+    <!-- listing -->
+    <div id="app-7">
+        <ol>
+            <!--
+            Now we provide each todo-item with the todo object
+            it's representing, so that its content can be dynamic.
+            We also need to provide each component with a "key",
+            which will be explained later.
+            -->
+            <todo-item
+            v-for="item in groceryList"
+            v-bind:todo="item"
+            v-bind:key="item.id">
+            </todo-item>
+        </ol>
+    </div>
+
+    <!-- require to read app.js-->
+    <script src="app.js"></script>
+
+</body>

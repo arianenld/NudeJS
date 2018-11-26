@@ -1,0 +1,9 @@
+{
+	"swagger":"2.0",
+
+	"info":{
+		"title":"Sample swagger",
+		"description":"Documentation and testing for your API's",
+		"version":"1.0"
+	}
+}
