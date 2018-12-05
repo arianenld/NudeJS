@@ -24,11 +24,11 @@
 				template(v-else)
 					td {{ user.user_isdel }}
 				td(style="text-align:center")
-					b-btn#buttonVE.warning(@click="editUser(user)") Edit
+					b-btn#buttonVE.btn-warning(@click="editUser(user)") Edit
 					template(v-if="user.user_isdel == 1")
-						b-btn#buttonAD.success(@click="deleteUser(user)") Activate
+						b-btn#buttonAD.btn-success(@click="deleteUser(user)") Activate
 					template(v-else)
-						b-btn#buttonAD.danger(@click="deleteUser(user)") Deactivate
+						b-btn#buttonAD.btn-danger(@click="deleteUser(user)") Deactivate
 			div
 				b-pagination(size="md" base-url="#/user-manager" :per-page="pageCount()" :totalRows="users.length" v-model="pageNumber")
 

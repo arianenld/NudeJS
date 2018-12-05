@@ -11,16 +11,17 @@
               input(style="margin-right: 10px; margin-left:500px; float:right", type="text"
                     v-model="search", v-on:keyup="searchUser(search)", placeholder="Search", name="search")
           th
-            b-btn(style="margin-right:10px; float:right", type="submit", size="sm", @click="addUser").success ADD USER
+            b-btn(style="margin-right:10px; float:right", type="submit", size="sm", @click="addUser").btn-success ADD USER
     table
         b-alert(:show="loading").warning Loading...
-          div(style="width: 500px; float:left")
-            user-table(
-              :users="users"
-              :userInfo="displayModel"
-              v-on:viewUser="viewUser"
-              v-on:deleteUser="deleteUser"
-              v-on:editUser="editUser")
+        div(style="width: 500px; float:left")
+
+        user-table(
+          :users="users"
+          :userInfo="displayModel"
+          v-on:viewUser="viewUser"
+          v-on:deleteUser="deleteUser"
+          v-on:editUser="editUser")
 
     edit-user-modal(
       :userInfo="model"
