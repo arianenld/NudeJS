@@ -1,6 +1,5 @@
  <template lang="pug">
-  div.container-fluid
-    h1.hi HI
+  div.container-fluid.mt-4
     table
       thead
         tr
@@ -13,6 +12,32 @@
                     v-model="search", v-on:keyup="searchUser(search)", placeholder="Search", name="search")
           th
             b-btn(style="margin-right:10px; float:right", type="submit", size="sm", @click="addUser").success ADD USER
+    table
+        b-alert(:show="loading").warning Loading...
+          div(style="width: 500px; float:left")
+            user-table(
+              :users="users"
+              :userInfo="displayModel"
+              v-on:viewUser="viewUser"
+              v-on:deleteUser="deleteUser"
+              v-on:editUser="editUser")
+
+    edit-user-modal(
+      :userInfo="model"
+      v-on:saveUser="saveUser"
+      ref="editUserModalRef"
+    )
+
+    delete-user-modal(
+      :userInfo="displayModel"
+      v-on:deleteUser="confirmDelete"
+      ref="deleteUserRef"
+    )
+
+    view-user-modal(
+      :userInfo="displayModel"
+      ref="viewUserRef"
+    )
 </template>
 
 <script>

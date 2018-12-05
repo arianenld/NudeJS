@@ -1,7 +1,6 @@
 <template lang="pug">
   div.hello
     h1 {{msg}}
-    h1 HOOOY!!!!!
 </template>
 
 <template lang="pug">

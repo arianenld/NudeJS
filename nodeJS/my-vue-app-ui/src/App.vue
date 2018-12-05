@@ -16,6 +16,7 @@
         b-nav-item(to="/") HOME
         b-nav-item(to="user-manager") USER MANAGER
     b-navbar(toggleable="md" type="light" variant="success" style="height:5px")
+    router-view
 
 
 

@@ -1,46 +1,37 @@
-<template>
-	<table  class="table table-striped table-hover striped-hover" hover>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th style="text-align:center">Action</th>
-                </tr>
-        </thead>
-        <tbody>
-            <tr v-for="user  in  paginatedData()"  :key="user.id" @click="viewUser(user)">
-                <td>{{ user.user_id }}</td>
-                <td>{{ user.user_fname }}</td>
-                <td>{{ user.user_lname }}</td>
-                <td>{{ user.user_email }}</td>
-                <td>{{ user.user_role }}</td>
-                    <template v-if="user.user_isdel == 1">
-                            <td>Inactive</td>
-                    </template>
-                    <template v-else-if="user.user_isdel == 0">
-                            <td>Active</td>
-                    </template>
-                    <template v-else>
-                            <td>{{ user.user_isdel }}</td>
-                    </template>
-                    <td style="text-align:center">
+<template lang="pug">
+	div
+		.table.table-striped.table-hover.striped-hover(hover)
+			thead
+			tr
+				th ID
+				th First Name
+				th Last Name
+				th Email
+				th Role
+				th Status
+				th(style="text-align:center") Action
+			tbody
+			tr(v-for="user in paginatedData()", :key="user.id", @click="viewUser(user)")
+				td {{user.user_id}}
+				td {{user.user_fname}}
+				td {{user.user_lname}}
+				td {{user.user_email}}
+				td {{user.user_role}}
+				template(v-if="user.user_isdel==1")
+					td Inactive
+				template(v-else-if="user.user_isdel == 0")
+					td Active
+				template(v-else)
+					td {{ user.user_isdel }}
+				td(style="text-align:center")
+					b-btn#buttonVE.warning(@click="editUser(user)") Edit
+					template(v-if="user.user_isdel == 1")
+						b-btn#buttonAD.success(@click="deleteUser(user)") Activate
+					template(v-else)
+						b-btn#buttonAD.danger(@click="deleteUser(user)") Deactivate
+			div
+				b-pagination(size="md" base-url="#/user-manager" :per-page="pageCount()" :totalRows="users.length" v-model="pageNumber")
 
-                    <b-btn id="buttonVE" variant="warning" @click="editUser(user)">Edit</b-btn>
-                    <template v-if="user.user_isdel == 1">
-                        <b-btn id="buttonAD" variant="success" @click="deleteUser(user)">Activate</b-btn>
-                    </template>
-                    <template v-else>
-                        <b-btn id="buttonAD" variant="danger" @click="deleteUser(user)">Deactivate</b-btn>
-                    </template>
-                </td>
-            </tr>
-        </tbody>
-        <b-pagination size="md" base-url="#/user-manager" :per-page="pageCount()" :totalRows="users.length" v-model="pageNumber"></b-pagination>
-    </table>
 </template>
 
 <script>
