@@ -1,37 +1,24 @@
-<template>
-  <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
-    <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
-      <router-view></router-view>
-    </main>
-  </div>
+<template lang="pug">
+  div#app
+    header
+      span Vue.js PWA
+    main
+      img(src="./assets/logo.png" alt="Vue.js PWA")
+    router-view
 </template>
 
-<template>
-	<div class="container-fluid mt-4" style="width:1200px" id="app">
-		<b-navbar toggleable="md" type="dark" variant="dark">
-			<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-			<b-navbar-brand to="/">USER MANAGEMENT</b-navbar-brand>
-			<b-collapse is-nav id="nav_collapse">
-				<b-navbar-nav>
-					<b-nav-item to="/">
-						HOME
-					</b-nav-item>
+<template lang="pug">
+  div.container-fluid#app(style="width:1200px")
+    b-navbar(toggleable="md", type="dark", variant="dark")
+      b-navbar-toggle(target="nav_collapse")
+      b-navbar-brand(to="/") USER MANAGEMENT
+      b-navbar-nav
+        b-nav-item(to="/") HOME
+        b-nav-item(to="user-manager") USER MANAGER
+    b-navbar(toggleable="md" type="light" variant="success" style="height:5px")
 
-          <b-nav-item  to="/user-manager">
-          USER MANAGER
-          </b-nav-item>
-				</b-navbar-nav>
-			</b-collapse>
-		</b-navbar>
-    <b-navbar toggleable="md" type="light" variant="success" style="height:5px">
-    </b-navbar>
-		<!-- routes will be rendered here -->
-		<router-view />
-	</div>
+
+
 </template>
 
 <script>
@@ -53,6 +40,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  width: 1500px;
 }
 
 main {

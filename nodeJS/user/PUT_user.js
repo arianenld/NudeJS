@@ -18,7 +18,6 @@ function  updateUser (req, res, _dbConnection, next) {
 	for(let prop in body) {
 		if (body.hasOwnProperty(prop)) {
 			count++;
-			console.log("request in")
 		}
 	}
 
@@ -34,7 +33,6 @@ function  updateUser (req, res, _dbConnection, next) {
 	else{
 		sqlQuery = `UPDATE user_tbl SET user_isdel = ?`
 		sqlData.push(body.user_isdel)
-		console.log("Pumasok")
 	}
 	//concat user_fname if not empty to the sql query
 	if (body.user_fname) {
@@ -45,7 +43,6 @@ function  updateUser (req, res, _dbConnection, next) {
 		if(count >  1){
 			sqlQuery +=  `,`
 			count--;
-			console.log("first name in")
 		}
 	}
 	//concat user_lname if not empty to the sql query
@@ -57,7 +54,6 @@ function  updateUser (req, res, _dbConnection, next) {
 		if(count >  1){
 			sqlQuery +=  `,`
 			count--;
-			console.log("last name in")
 		}
 	}
 
@@ -68,29 +64,12 @@ function  updateUser (req, res, _dbConnection, next) {
 		
 			sqlQuery +=  ` user_isdel = ? `
 			sqlData.push(body.user_isdel)
-			console.log(sqlQuery + " sd " + body.user_isdel)
-		
-
 		//check if the body object we count is above 1 then we will add a comma
 		if(count >  1){
 			sqlQuery +=  `,`
 			count--;
 		}
 	}
-
-	/*if (body.hehe) {
-		
-		sqlQuery +=  ` user_isdel = ? `
-		sqlData.push(body.user_isdel)
-		console.log(sqlQuery + " NASA BODY.HEHE " + body.user_isdel)
-	
-
-	//check if the body object we count is above 1 then we will add a comma
-		if(count >  1){
-			sqlQuery +=  `,`
-			count--;
-		}
-	}*/
 	//concat user_email if not empty to the sql query
 	if (body.user_email) {
 		sqlQuery +=  ` user_email = ? `
@@ -100,7 +79,6 @@ function  updateUser (req, res, _dbConnection, next) {
 		if(count >  1){
 			sqlQuery +=  `,`
 			count--;
-			console.log("user name in")
 		}
 	}
 	//concat user_role if not empty to the sql query
@@ -112,7 +90,6 @@ function  updateUser (req, res, _dbConnection, next) {
 		if(count >  1){
 			sqlQuery +=  `,`
 			count--;
-			console.log("role in")
 		}
 	}
 
