@@ -11,7 +11,7 @@
 				th Status
 				th(style="text-align:center") Action
 			tbody
-			tr(v-for="user in paginatedData()", :key="user.id", @click="viewUser(user)")
+			tr(v-for="user in paginatedData()", :key="user.id")
 				td {{user.user_id}}
 				td {{user.user_fname}}
 				td {{user.user_lname}}

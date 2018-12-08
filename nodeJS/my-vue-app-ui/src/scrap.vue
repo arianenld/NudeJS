@@ -177,6 +177,91 @@ export default {
 <style>
 
 </style>
+<!-- VIEW USER MODAL -->
+<template>
+    <b-modal id="modal2" :hide-footer=true ref="viewUserRef">
+		<div>
+		<b-card  :title="('User Information:')">
+			<form>
+			<b-form-group  label="First Name">
+				<b-form-input  type="text"  v-model="userInfo.user_fname"></b-form-input>
+			</b-form-group>
+      <b-form-group  label="Last Name">
+				<b-form-input  type="text"  v-model="userInfo.user_lname"></b-form-input>
+			</b-form-group>
+      <b-form-group  label="Email">
+				<b-form-input  type="text"  v-model="userInfo.user_email"></b-form-input>
+			</b-form-group>
+      <b-form-group  label="Role">
+					<b-form-input  type="text"  v-model="userInfo.user_role"></b-form-input>
+			</b-form-group>
+      </form>
+		</b-card>
+		</div>
+	</b-modal>
+</template>
+
+<!-- DELETE USER MODAL -->
+<template>
+  	<b-modal id="deleteUserModal" :hide-footer=true ref="deleteUserModalRef">
+		<form @submit.prevent="deleteUser()" >
+			<b-nav-form variant="danger" align="center" @submit.prevent="deleteUser">
+			<b-card  :title="'Are you sure you want to delete user ' + userInfo.user_fname + '?'" style="width:500px">
+				<b-btn style="width:80px" text-align="center" type="submit" variant="success"> Confirm </b-btn>
+				<b-btn style="width:80px" text-align="center" v-if="userInfo.user_id  ?  true  :  false"  variant="dark"  @click="hideModal">Cancel</b-btn>
+			</b-card>
+			</b-nav-form>
+		</form>
+	</b-modal>
+</template>
+
+<!-- EDIT USER MODAL -->
+
+<template>
+  	<b-modal id="modal1" :hide-footer=true ref="editUserRef" header-bg-variant="dark">
+    <div>
+		<b-card  :title="(userInfo.user_id  ?  'Edit user ID #'  +  userInfo.user_id  :  'New user')">
+          <form  @submit.prevent="saveUser">
+          <b-form-group  label="First Name">
+               <b-form-input  type="text"  v-model="userInfo.user_fname"></b-form-input>
+          </b-form-group>
+          <div v-if="$v.userInfo.user_fname.$dirty">
+               <p v-if="!$v.userInfo.user_fname.required">*Please fill out missing fields.</p>
+               <p v-else-if="!$v.userInfo.user_fname.min">*Minimum of three (3) characters.</p>
+               <p v-else-if="!$v.userInfo.user_fname.alpha">*Numeric characters are not allowed.</p>
+          </div>
+          <b-form-group  label="Last Name">
+               <b-form-input  type="text"  v-model="userInfo.user_lname"></b-form-input>
+          </b-form-group>
+          <div v-if="$v.userInfo.user_lname.$dirty">
+               <p v-if="!$v.userInfo.user_lname.required">*Please fill out missing fields.</p>
+               <p v-if="!$v.userInfo.user_lname.min">*Minimum of three (3) characters.</p>
+               <p v-if="!$v.userInfo.user_lname.alpha">*Numeric characters are not allowed.</p>
+          </div>
+          <b-form-group  label="Email">
+               <b-form-input  type="text"  v-model="userInfo.user_email"></b-form-input>
+          </b-form-group>
+          <div v-if="$v.userInfo.user_email.$dirty">
+               <p v-if="!$v.userInfo.user_email.required">*Please fill out missing fields.</p>
+               <p v-if="!$v.userInfo.user_email.email">*Please enter valid email.</p>
+          </div>
+          <b-form-group  label="Role">
+                    <b-form-input type="text"  v-model="userInfo.user_role"></b-form-input>
+          </b-form-group>
+          <div v-if="$v.userInfo.user_role.$dirty">
+               <p v-if="!$v.userInfo.user_role.required">*Please fill out missing fields.</p>
+               <p v-if="!$v.userInfo.user_role.min">*Minimum of three (2) characters.</p>
+          </div>
+
+          <div>
+            <b-btn  type="submit" variant="success"> Save </b-btn>
+            <b-btn  v-if="userInfo.user_id  ?  true  :  false"  variant="dark"  @click.prevent="clear()">Cancel</b-btn>
+          </div>
+		</form>
+		</b-card>
+	</div>
+	</b-modal>
+</template>
 
 
 

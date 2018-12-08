@@ -1,14 +1,11 @@
-<template>
-  	<b-modal id="deleteUserModal" :hide-footer=true ref="deleteUserModalRef">
-		<form @submit.prevent="deleteUser()" >
-			<b-nav-form variant="danger" align="center" @submit.prevent="deleteUser">
-			<b-card  :title="'Are you sure you want to delete user ' + userInfo.user_fname + '?'" style="width:500px">
-				<b-btn style="width:80px" text-align="center" type="submit" variant="success"> Confirm </b-btn>
-				<b-btn style="width:80px" text-align="center" v-if="userInfo.user_id  ?  true  :  false"  variant="dark"  @click="hideModal">Cancel</b-btn>
-			</b-card>
-			</b-nav-form>
-		</form>
-	</b-modal>
+<template lang="pug">
+  b-modal#deleteUserModal(hide-footer=true, ref="deleteUserModalRef")
+    div
+      form(@submit.prevent="deleteUser()")
+        b-nav-form.btn-danger(@submit.prevent="deleteUser")
+        b-card(:title="'Are you sure you want to delete user ' + userInfo.user_fname + '?'", align="center")
+          b-btn.btn-success(style="width:80px", text-align="center", type="submit") Confirm
+          b-btn.btn-dark(style="width:80px", text-alin="center", v-if="userInfo.user_id  ?  true  :  false", @click="hideModal") Cancel
 </template>
 
 <script>

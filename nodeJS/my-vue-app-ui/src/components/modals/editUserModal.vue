@@ -1,48 +1,38 @@
+<template lang="pug">
+  b-modal#modal1(hide-footer=true, ref="editUserRef", header-bg-variant="dark")
+    b-card(:title="(userInfo.user_id  ?  'Edit user ID #'  +  userInfo.user_id  :  'New user')")
+      form(@submit.prevent="saveUser")
+        b-form-group(label="First Name")
+          b-form-input(type="text", v-model="userInfo.user_fname")
+        div(v-if="$v.userInfo.user_fname.$dirty")
+          p(v-if="!$v.userInfo.user_fname.required") *Please fill out missing fields.
+          p(v-else-if="!$v.userInfo.user_fname.min") *Minimum of three (3) characters.
+          p(v-else-if="!$v.userInfo.user_fname.alpha") *Numeric characters are not allowed.
 
-<template>
-  	<b-modal id="modal1" :hide-footer=true ref="editUserRef" header-bg-variant="dark">
-    <div>
-		<b-card  :title="(userInfo.user_id  ?  'Edit user ID #'  +  userInfo.user_id  :  'New user')">
-          <form  @submit.prevent="saveUser">
-          <b-form-group  label="First Name">
-               <b-form-input  type="text"  v-model="userInfo.user_fname"></b-form-input>
-          </b-form-group>
-          <div v-if="$v.userInfo.user_fname.$dirty">
-               <p v-if="!$v.userInfo.user_fname.required">*Please fill out missing fields.</p>
-               <p v-else-if="!$v.userInfo.user_fname.min">*Minimum of three (3) characters.</p>
-               <p v-else-if="!$v.userInfo.user_fname.alpha">*Numeric characters are not allowed.</p>
-          </div>
-          <b-form-group  label="Last Name">
-               <b-form-input  type="text"  v-model="userInfo.user_lname"></b-form-input>
-          </b-form-group>
-          <div v-if="$v.userInfo.user_lname.$dirty">
-               <p v-if="!$v.userInfo.user_lname.required">*Please fill out missing fields.</p>
-               <p v-if="!$v.userInfo.user_lname.min">*Minimum of three (3) characters.</p>
-               <p v-if="!$v.userInfo.user_lname.alpha">*Numeric characters are not allowed.</p>
-          </div>
-          <b-form-group  label="Email">
-               <b-form-input  type="text"  v-model="userInfo.user_email"></b-form-input>
-          </b-form-group>
-          <div v-if="$v.userInfo.user_email.$dirty">
-               <p v-if="!$v.userInfo.user_email.required">*Please fill out missing fields.</p>
-               <p v-if="!$v.userInfo.user_email.email">*Please enter valid email.</p>
-          </div>
-          <b-form-group  label="Role">
-                    <b-form-input type="text"  v-model="userInfo.user_role"></b-form-input>
-          </b-form-group>
-          <div v-if="$v.userInfo.user_role.$dirty">
-               <p v-if="!$v.userInfo.user_role.required">*Please fill out missing fields.</p>
-               <p v-if="!$v.userInfo.user_role.min">*Minimum of three (2) characters.</p>
-          </div>
+        b-form-group(label="Last Name")
+          b-form-input(type="text", v-model="userInfo.user_lname")
+        div(v-if="$v.userInfo.user_lname.$dirty")
+          p(v-if="!$v.userInfo.user_lname.required") *Please fill out missing fields.
+          p(v-else-if="!$v.userInfo.user_lname.min") *Minimum of three (3) characters.
+          p(v-else-if="!$v.userInfo.user_lname.alpha") *Numeric characters are not allowed.
 
-          <div>
-            <b-btn  type="submit" variant="success"> Save </b-btn>
-            <b-btn  v-if="userInfo.user_id  ?  true  :  false"  variant="dark"  @click.prevent="clear()">Cancel</b-btn>
-          </div>
-		</form>
-		</b-card>
-	</div>
-	</b-modal>
+        b-form-group(label="Email")
+          b-form-input(type="text", v-model="userInfo.user_email")
+        div(v-if="$v.userInfo.user_email.$dirty")
+          p(v-if="!$v.userInfo.user_email.required") *Please fill out missing fields.
+          p(v-else-if="!$v.userInfo.user_email.email") *Please enter valid email.
+
+        b-form-group(label="Role")
+          b-form-input(type="text", v-model="userInfo.user_role")
+        div(v-if="$v.userInfo.user_role.$dirty")
+          p(v-if="!$v.userInfo.user_role.required") *Please fill out missing fields.
+          p(v-if="!$v.userInfo.user_role.min") *Minimum of three (2) characters.
+
+        div
+          b-btn.btn-success(type="submit") Save
+          b-btn.btn-dark(v-if="userInfo.user_id  ?  true  :  false", @click.prevent="clear()") Cancel
+
+
 </template>
 
 <script>
