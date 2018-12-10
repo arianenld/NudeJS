@@ -3,21 +3,23 @@
     header
       span Vue.js PWA
     main
-      img(src="./assets/logo.png" alt="Vue.js PWA")
     router-view
 </template>
 
 <template lang="pug">
-  div.container-fluid#app(style="width:1200px")
-    b-navbar(toggleable="md", type="dark", variant="dark")
-      b-navbar-toggle(target="nav_collapse")
-      b-navbar-brand(to="/") USER MANAGEMENT
-      b-navbar-nav
-        b-nav-item(to="/") HOME
-        b-nav-item(to="user-manager") USER MANAGER
-    b-navbar(toggleable="md" type="light" variant="success" style="height:5px")
-    router-view
 
+section
+  nav.navbar.is-dark(role="navigation", aria-label="main navigation")
+    div.navbar-brand
+      a.navbar-item(to="/") USER MANAGEMENT
+      div.navbar-brand
+        a.navbar-item(to="/")
+
+        div.navbar-menu
+          div.navbar-start
+            a.navbar-item(to="/") Home
+            a.navbar-item(to="/user-manager") User Manager
+  router-view
 
 
 </template>

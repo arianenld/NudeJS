@@ -1,44 +1,51 @@
  <template lang="pug">
-  div.container-fluid.mt-4
-    table
-      thead
-        tr
-          th
-            h1(align="left") CHOOSE ACTION
-          th
-            form(@submit.prevent="searchUser")
-            b-nav-form(align="center")
-              input(style="margin-right: 10px; margin-left:500px; float:right", type="text"
-                    v-model="search", v-on:keyup="searchUser(search)", placeholder="Search", name="search")
-          th
-            b-btn(style="margin-right:10px; float:right", type="submit", size="sm", @click="addUser").btn-success ADD USER
-    table
-        b-alert(:show="loading").warning Loading...
-        div(style="width: 500px; float:left")
+	//section.container
+		b-table
+			thead
+				tr
+					th
+						h1(align="left") CHOOSE ACTION
+					th
+						form(@submiit.prevebt="searchUser")
+						b-nav-form(align="center")
+							b-input(style="margin-right: 10px; margin-left:500px; float:right", type="text"
+						v-model="search", v-on:keyup="searchUser(search)", placeholder="Search", name="search")
+					th
+						button.button-success(style="margin-right:10px; float:right", type="submit", size="sm", @click="addUser")
+	section.container
+		.columns
+			.column.is-6.is-black
+				h1.title User Manager
+			.column.is-offset-1.is-2
+				input.input(type="text", v-on:keyup="searchUser", placeholder="Search...", name="search")
+			.column
+				button.button.is-success Add User
+		section
+			user-table(
+			:users="users",
+			:userInfo="displayModel",
+			v-on:viewUser="viewUser",
+			v-on:deleteUser="deleteUser",
+			v-on:editUser="editUser")
 
-        user-table(
-          :users="users"
-          :userInfo="displayModel"
-          v-on:viewUser="viewUser"
-          v-on:deleteUser="deleteUser"
-          v-on:editUser="editUser")
+		edit-user-modal(
+		:userInfo="model",
+		v-on:saveUser="saveUser",
+		ref="editUserModalRef",
+		)
 
-    edit-user-modal(
-      :userInfo="model"
-      v-on:saveUser="saveUser"
-      ref="editUserModalRef"
-    )
+		delete-user-modal(
+		:userInfo="displayModel",
+		v-on:deleteUser="confirmDelete",
+		ref="deleteUserRef",
+		)
 
-    delete-user-modal(
-      :userInfo="displayModel"
-      v-on:deleteUser="confirmDelete"
-      ref="deleteUserRef"
-    )
+		view-user-modal(
+		:userInfo="displayModel",
+		ref="viewUserRef",
+		)
 
-    view-user-modal(
-      :userInfo="displayModel"
-      ref="viewUserRef"
-    )
+
 </template>
 
 <script>
@@ -122,8 +129,6 @@ export default {
     },
 
     async getUser(user) {
-      alert(user.user_isdel)
-
       this.displayModel={
         user_fname: user.user_fname,
         user_lname: user.user_lname,

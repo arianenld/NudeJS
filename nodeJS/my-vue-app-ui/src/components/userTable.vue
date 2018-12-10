@@ -1,49 +1,48 @@
 <template lang="pug">
-	div
-		.table.table-striped.table-hover.striped-hover(hover)
-			thead
-			tr
-				th ID
-				th First Name
-				th Last Name
-				th Email
-				th Role
-				th Status
-				th(style="text-align:center") Action
-			tbody
-			tr(v-for="user in paginatedData()", :key="user.id")
-				td {{user.user_id}}
-				td {{user.user_fname}}
-				td {{user.user_lname}}
-				td {{user.user_email}}
-				td {{user.user_role}}
-				template(v-if="user.user_isdel==1")
-					td Inactive
-				template(v-else-if="user.user_isdel == 0")
-					td Active
+section
+	b-table(:data="users",
+			:paginated="isPaginated",
+            :per-page="perPage"
+            :current-page.sync="currentPage",
+            pagination-simple,
+            :default-sort-direction="defaultSortDirection")
+
+		template(slot-scope="user")
+			b-table-column(label="ID", field="user_id", width="40px", sortable, numeric)
+				span {{user.row.user_id}}
+			b-table-column(label="First Name", field="user_fname", width="40px", sortable)
+				span {{user.row.user_fname}}
+			b-table-column(label="Last Name", field="user_lname", sortable)
+				span {{user.row.user_lname}}
+			b-table-column(label="Email", field="user_email", sortable)
+				span {{user.row.user_email}}
+			b-table-column(label="Role", field="user_role", sortable)
+				span {{user.row.user_role}}
+			b-table-column(label="Status")
+				p(v-if="user.row.user_isdel==1") Inactive
+				p(v-else) Active
+			b-table-column(label="Action", style="align:center")
+				button.button.is-warning#buttonVE(@click="editUser(user.row)") Edit
+				template(v-if="user.row.user_isdel==1")
+					button#buttonAD.button.is-success(@click="deleteUser(user.row)") Activate
 				template(v-else)
-					td {{ user.user_isdel }}
-				td(style="text-align:center")
-					b-btn#buttonVE.btn-warning(@click="editUser(user)") Edit
-					template(v-if="user.user_isdel == 1")
-						b-btn#buttonAD.btn-success(@click="deleteUser(user)") Activate
-					template(v-else)
-						b-btn#buttonAD.btn-danger(@click="deleteUser(user)") Deactivate
-			div
-				b-pagination(size="md" base-url="#/user-manager" :per-page="pageCount()" :totalRows="users.length" v-model="pageNumber")
+					button#buttonAD.button.is-danger(@click="deleteUser(user.row)") Deactivate
 
 </template>
 
 <script>
 export default {
-  props: ['users'],
+	props: ['users'],
 	data (){
-    return {
+		return {
 			userInfo: {},
-            pageNumber: 1,
-            size: 5
-     }
-  },
+			isPaginated: true,
+			isPaginationSimple: false,
+			defaultSortDirection: 'asc',
+			currentPage: 1,
+			perPage: 5
+		 }
+	},
 
 	methods: {
 		viewUser (user) {
@@ -56,7 +55,7 @@ export default {
 
 		deleteUser(user){
 			this.$emit('deleteUser', user)
-    },
+		},
 
 		pageCount(){
 			let l = this.users.length,
@@ -68,27 +67,26 @@ export default {
 			const start = (this.pageNumber -1) * this.size,
 						end = start + this.size;
 			return this.users.slice(start,end)
-        }
-    }
+				}
+		}
 }
 </script>
 
 <style>
 
 #buttonVE {
-  float: right;
-  width: 80px;
-  text-align: center;
-  display: inline-block;
-  size: small;
-  margin-inline-start: 5px
+	width: 80px;
+	text-align: center;
+	display: inline-block;
+	size: small;
+	margin-inline-start: 5px
 }
 
 #buttonAD {
-  width: 100px;
-  size: small;
-  text-align: center;
-  display: inline-block;
+	width: 100px;
+	size: small;
+	text-align: center;
+	display: inline-block;
 }
 
 </style>

@@ -1,16 +1,21 @@
 <template lang="pug">
-    b-modal#modal2(hide-footer=true, ref="viewUserRef")
-      div
-      b-card(title="User Information")
-        form
-          b-form-group(label="First Name")
-            b-form-input(type="text", v-model="userInfo.user_fname")
-          b-form-group(label="Last Name")
-            b-form-input(type="text", v-model="userInfo.user_lname")
-          b-form-group(label="Email")
-            b-form-input(type="text", v-model="userInfo.user_email")
-          b-form-group(label="Role")
-            b-form-input(type="text", v-model="userInfo.user_email")
+	section
+		b-modal#modal2(hide-footer=true, ref="viewUserRef", :active.sync="showViewModal")
+			.card
+				.modal-card
+					header.modal-card-head
+						p.modal-card-title User Information
+
+			.modal-card-body
+				form
+				b-field(label="First Name")
+					b-input(type="text", v-model="userInfo.user_fname")
+				b-field(label="Last Name")
+					b-input(type="text", v-model="userInfo.user_lname")
+				b-field(label="Email")
+					b-input(type="text", v-model="userInfo.user_email")
+				b-field(label="Role")
+					b-input(type="text", v-model="userInfo.user_email")
 </template>
 
 <script>
@@ -19,17 +24,17 @@ export default {
 
   data(){
     return{
-
+      showViewModal: false
     }
   },
 
   methods:{
     showModal() {
-      this.$refs.viewUserRef.show();
+      this.showViewModal = true
     },
 
     hideModal(){
-      this.$refs.viewUserRef.hide();
+      this.showViewModal = false
     }
   }
 
