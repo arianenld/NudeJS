@@ -13,13 +13,15 @@
 					th
 						button.button-success(style="margin-right:10px; float:right", type="submit", size="sm", @click="addUser")
 	section.container
+		br
 		.columns
 			.column.is-6.is-black
-				h1.title User Manager
+				h1.title CHOOSE ACTION
+			form(@submit.prevent="searchUser")
 			.column.is-offset-1.is-2
-				input.input(type="text", v-on:keyup="searchUser", placeholder="Search...", name="search")
+				input.input(type="text", v-on:keyup="searchUser(user)", placeholder="Search...", name="search")
 			.column
-				button.button.is-success Add User
+				button.button.is-success(@click="addUser") Add User
 		section
 			user-table(
 			:users="users",
