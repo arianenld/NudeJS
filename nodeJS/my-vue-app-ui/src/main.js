@@ -5,13 +5,15 @@ import App from './App'
 import router from './router'
 //import BootstrapVue from 'bootstrap-vue'
 import Vuelidate from 'vuelidate'
-
+import 'material-design-icons/iconfont/material-icons.css'
 //import 'bootstrap/dist/css/bootstrap.css'
 //import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-Vue.use(Buefy)
+Vue.use(Buefy, {
+  defaultIconPack: "fa"
+})
 Vue.config.productionTip  =  false
 //Vue.use(BootstrapVue)
 Vue.use(Vuelidate)

@@ -10,7 +10,7 @@
 							p(v-else) Are you sure you want to change user {{userInfo.user_fname}} status from Inactive to Active?
 						footer.modal-card-foot(style="justify-content: flex-end")
 								button.button.is-success(style="width:80px", text-align="center", type="submit") Confirm
-								button.button.is-dark(style="width:80px", text-align="center", @click="hideModal") Cancel
+								button.button.is-dark(style="width:80px", text-align="center", type="button",@click="hideModal") Cancel
 </template>
 
 <script>

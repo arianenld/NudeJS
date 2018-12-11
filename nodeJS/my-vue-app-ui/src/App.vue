@@ -11,14 +11,17 @@
 section
   nav.navbar.is-dark(role="navigation", aria-label="main navigation")
     div.navbar-brand
-      a.navbar-item(to="/") USER MANAGEMENT
+      a.navbar-item
+        router-link(to="/") USER MANAGEMENT
       div.navbar-brand
-        a.navbar-item(to="/")
 
-        div.navbar-menu
-          div.navbar-start
-            a.navbar-item(to="/") Home
-            a.navbar-item(to="/user-manager") User Manager
+
+      div.navbar-menu
+        div.navbar-start
+          a.navbar-item
+            router-link(to="/") Home
+          a.navbar-item
+            router-link(to='/user-manager') User Manager
   router-view
 
 
@@ -69,3 +72,9 @@ header span {
   box-sizing: border-box;
   padding-top: 16px;
 }
+
+a{
+    color: white;
+  }
+
+</style>

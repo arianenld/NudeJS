@@ -4,9 +4,10 @@
 			.card
 				.modal-card
 					header.modal-card-head
-						p.modal-card-title User Information
+						p.modal-card-title(v-if="userInfo.user_isdel == 0") User Information
+						p.modal-card-title(v-else) Notice
 
-			.modal-card-body
+			.modal-card-body(v-if="userInfo.user_isdel == 0")
 				form
 				b-field(label="First Name")
 					b-input(type="text", v-model="userInfo.user_fname")
@@ -16,6 +17,10 @@
 					b-input(type="text", v-model="userInfo.user_email")
 				b-field(label="Role")
 					b-input(type="text", v-model="userInfo.user_email")
+
+			.modal-card-body(v-else)
+				form
+				p USER INFORMATION NOT AVAILABLE AT THE MOMENT. PLEASE ACTIVATE USER TO VIEW INFORMATION.
 </template>
 
 <script>

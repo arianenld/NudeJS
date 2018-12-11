@@ -1,13 +1,16 @@
 <template lang="pug">
-section
+section#tableSize
 	b-table(:data="users",
 			:paginated="isPaginated",
             :per-page="perPage"
             :current-page.sync="currentPage",
             pagination-simple,
-            :default-sort-direction="defaultSortDirection")
+            :default-sort-direction="defaultSortDirection", narrowed)
 
 		template(slot-scope="user")
+			b-table-column
+				span
+					i.fas.fa-eye(@click="viewUser(user.row)")
 			b-table-column(label="ID", field="user_id", width="40px", sortable, numeric)
 				span {{user.row.user_id}}
 			b-table-column(label="First Name", field="user_fname", width="40px", sortable)
@@ -19,14 +22,14 @@ section
 			b-table-column(label="Role", field="user_role", sortable)
 				span {{user.row.user_role}}
 			b-table-column(label="Status")
-				p(v-if="user.row.user_isdel==1") Inactive
-				p(v-else) Active
-			b-table-column(label="Action", style="align:center")
-				button.button.is-warning#buttonVE(@click="editUser(user.row)") Edit
+				span(v-if="user.row.user_isdel==1") Inactive
+				span(v-else) Active
+			b-table-column(label="Action", centered)
+				button.button.is-warning#buttonVE(@click="editUser(user.row)").fas.fa-edit Edit
 				template(v-if="user.row.user_isdel==1")
-					button#buttonAD.button.is-success(@click="deleteUser(user.row)") Activate
+					button#buttonAD.button.is-success(@click="deleteUser(user.row)").fas.fa-eye Activate
 				template(v-else)
-					button#buttonAD.button.is-danger(@click="deleteUser(user.row)") Deactivate
+					button#buttonAD.button.is-danger(@click="deleteUser(user.row)").fas.fa-eye-slash Deactivate
 
 </template>
 
@@ -46,7 +49,7 @@ export default {
 
 	methods: {
 		viewUser (user) {
-			this.$emit('viewUser', user)
+      this.$emit('viewUser', user)
 		},
 
 		editUser (user){
@@ -83,10 +86,19 @@ export default {
 }
 
 #buttonAD {
-	width: 100px;
+	width: 110px;
 	size: small;
 	text-align: center;
 	display: inline-block;
+}
+
+b-colum-table{
+	text-align:center;
+}
+
+#tableSize{
+  width: 80%;
+  margin: auto;
 }
 
 </style>

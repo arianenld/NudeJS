@@ -17,12 +17,12 @@
 		.columns
 			.column.is-6.is-black
 				h1.title CHOOSE ACTION
-			form(@submit.prevent="searchUser")
-			.column.is-offset-1.is-2
-				input.input(type="text", v-on:keyup="searchUser(user)", placeholder="Search...", name="search")
+			.column.is-offset-3.is-2
+				input.input(v-model="search",  v-on:keyup="searchUser(search)", placeholder="Search...", name="search")
 			.column
-				button.button.is-success(@click="addUser") Add User
-		section
+				button.button.is-success(@click="addUser")
+					i.fas.fa-user-plus Add User
+		section.is-narrow
 			user-table(
 			:users="users",
 			:userInfo="displayModel",
@@ -46,7 +46,6 @@
 		:userInfo="displayModel",
 		ref="viewUserRef",
 		)
-
 
 </template>
 
@@ -195,3 +194,10 @@ export default {
 }
 };
 </script>
+
+<style>
+.button{
+	width: 110px;
+	text-align: center;
+}
+</style>

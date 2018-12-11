@@ -12,32 +12,33 @@
 							b-field(label="First Name")
 								b-input(type="text", v-model="userInfo.user_fname")
 							div(v-if="$v.userInfo.user_fname.$dirty")
-							p(v-if="!$v.userInfo.user_fname.required") *Please fill out missing fields.
-							p(v-else-if="!$v.userInfo.user_fname.min") *Minimum of three (3) characters.
-							p(v-else-if="!$v.userInfo.user_fname.alpha") *Numeric characters are not allowed.
+							p#error(v-if="!$v.userInfo.user_fname.required") *Please fill out missing fields.
+							p#error(v-else-if="!$v.userInfo.user_fname.min") *Minimum of three (3) characters.
+							p#error(v-else-if="!$v.userInfo.user_fname.alpha") *Numeric and special characters are not allowed.
 
 							b-field(label="Last Name")
 								b-input(type="text", v-model="userInfo.user_lname")
 							div(v-if="$v.userInfo.user_lname.$dirty")
-							p(v-if="!$v.userInfo.user_lname.required") *Please fill out missing fields.
-							p(v-else-if="!$v.userInfo.user_lname.min") *Minimum of three (3) characters.
-							p(v-else-if="!$v.userInfo.user_lname.alpha") *Numeric characters are not allowed.
+							p#error(v-if="!$v.userInfo.user_lname.required") *Please fill out missing fields.
+							p#error(v-else-if="!$v.userInfo.user_lname.min") *Minimum of three (3) characters.
+							p#error(v-else-if="!$v.userInfo.user_lname.alpha") *Numeric and special characters are not allowed.
 
 							b-field(label="Email")
 								b-input(type="text", v-model="userInfo.user_email")
 							div(v-if="$v.userInfo.user_email.$dirty")
-							p(v-if="!$v.userInfo.user_email.required") *Please fill out missing fields.
-							p(v-else-if="!$v.userInfo.user_email.email") *Please enter valid email.
+							p#error(v-if="!$v.userInfo.user_email.required") *Please fill out missing fields.
+							p#error(v-else-if="!$v.userInfo.user_email.email") *Please enter valid email.
 
 							b-field(label="Role")
 								b-input(type="text", v-model="userInfo.user_role")
 							div(v-if="$v.userInfo.user_role.$dirty")
-							p(v-if="!$v.userInfo.user_role.required") *Please fill out missing fields.
-							p(v-if="!$v.userInfo.user_role.min") *Minimum of three (2) characters.
+							p#error(v-if="!$v.userInfo.user_role.required") *Please fill out missing fields.
+							p#error(v-if="!$v.userInfo.user_role.min") *Minimum of three (2) characters.
 
 							div
+								button.button.is-dark(@click.prevent="hideModal") Cancel
 								button.button.is-success(type="submit") Save
-								button.button.is-dark(v-if="userInfo.user_id  ?  true  :  false", @click.prevent="clear()") Cancel
+
 
 </template>
 <script>
@@ -84,6 +85,10 @@ button {
   text-align: center;
   display: inline-block;
   margin-inline-start: 4px;
+}
+
+#error{
+	color: red;
 }
 
 </style>
