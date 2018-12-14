@@ -25,12 +25,13 @@ section#tableSize
 				span(v-if="user.row.user_isdel==1") Inactive
 				span(v-else) Active
 			b-table-column(label="Action", centered)
-				button.button.is-warning#buttonVE(@click="editUser(user.row)").fas.fa-edit Edit
 				template(v-if="user.row.user_isdel==1")
 					button#buttonAD.button.is-success(@click="deleteUser(user.row)").fas.fa-eye Activate
+					b-tooltip(label="Activate user to edit.", position="is-bottom", type="is-light")
+						button.button.is-warning#buttonVE(@click="editUser(user.row)", disabled).fas.fa-edit Edit
 				template(v-else)
 					button#buttonAD.button.is-danger(@click="deleteUser(user.row)").fas.fa-eye-slash Deactivate
-
+					button.button.is-warning#buttonVE(@click="editUser(user.row)").fas.fa-edit Edit
 </template>
 
 <script>
