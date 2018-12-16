@@ -1,0 +1,117 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "title":"Sample Swagger",
+        "description":"Documentation and testing of Arjay's APIs",
+        "version":"1.0"
+    },
+    "produces":[
+        "application/json"
+        ],
+    "paths":{
+        "/api/user/{userId}":{
+            "get":{
+                "summary":"generate a single user",
+                "operationId":"generate a single user",
+                "tags":[
+                    "User"
+                ],
+                "description":"This will generate a single user.",
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"userId",
+                        "type":"integer",
+                        "required":true,
+                        "description":"We need to input user id"
+                    }
+                ],
+                "responses":{
+    
+                }
+            },
+            "put":{
+                "summary":"update and delete user",
+                "operationId":"update and delete a user",
+                "tags":[
+                "User"
+                ],
+                "description":"This will update a user in the system. If the user_isdel is 1, the user with that id will be deleted.",
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"userId",
+                        "type":"integer",
+                        "required":true,
+                        "description":"We need to input user id"
+                    },
+                    {
+                        "in":"body",
+                        "name":"body",
+                        "required":true,
+                        "description":"Body",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                    
+                ],
+                "responses":{
+    
+                }
+            }
+        },
+    
+        "/api/user":{
+            "get":{
+                "summary":"generate all users",
+                "operationId":"generate all users",
+                "tags":[
+                    "User"
+                ],
+                "description":"This will all the users in the system.",
+                "responses":{
+    
+                }
+            },
+            "post":{
+                "summary":"create a user",
+                "operationId":"create a user",
+                "tags":[
+                "User"
+                ],
+                "description":"This will create a new user in the system. Only the user_fname and user_lname is required in the field.",
+                "parameters":[
+                    {
+                    "in":"body",
+                    "name":"body",
+                    "required":true,
+                    "description":"Body",
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses":{
+    
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "user_fname": {
+                    "type": "string"
+                },
+                "user_lname": {
+                    "type": "string"
+                },
+                "user_isdel": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

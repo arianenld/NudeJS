@@ -3,7 +3,9 @@ const bodyParser =  require('body-parser');
 const express = require('express');
 const server = express();
 const swaggerUi = require('swagger-ui-express');
-//sconst swagger = require('./swagger')
+
+const swagger =  require('./swagger')
+server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger));
 
 //set the view engine to ejs
 server.set('view engine', 'ejs');
@@ -33,13 +35,11 @@ server.use(function (req, res, next) {
 	next();
 });
 
-//server.js
 //display hello world
 server.get('/hello', (req, res) => {
 	res.send('Hello World')
 })
 
-// server.js
 var connection =  require('./config/db-mysql.js');
 
 connection.init((conn) =>{
@@ -65,3 +65,4 @@ function  loadModules (server, dbConnection, callback) {
 
 	callback(null, { status: 'success' })
 }
+
