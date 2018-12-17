@@ -12,16 +12,16 @@ section
   nav.navbar.is-dark(role="navigation", aria-label="main navigation")
     div.navbar-brand
       a.navbar-item
-        router-link(to="/") USER MANAGEMENT
+        router-link#linkColor(to="/") USER MANAGEMENT
       div.navbar-brand
 
 
       div.navbar-menu
         div.navbar-start
           a.navbar-item
-            router-link(to="/") Home
+            router-link#linkColor(to="/") Home
           a.navbar-item
-            router-link(to='/user-manager') User Manager
+            router-link#linkColor(to='/user-manager') User Manager
   router-view
 
 
@@ -73,8 +73,7 @@ header span {
   padding-top: 16px;
 }
 
-a{
+#linkColor{
     color: white;
   }
-
 </style>

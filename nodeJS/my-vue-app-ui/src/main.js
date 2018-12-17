@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 //import BootstrapVue from 'bootstrap-vue'
 import Vuelidate from 'vuelidate'
-import 'material-design-icons/iconfont/material-icons.css'
+
 //import 'bootstrap/dist/css/bootstrap.css'
 //import 'bootstrap-vue/dist/bootstrap-vue.css'
 

@@ -5,30 +5,29 @@ section#tableSize
             :per-page="perPage"
             :current-page.sync="currentPage",
             pagination-simple,
-            :default-sort-direction="defaultSortDirection", narrowed)
+            :default-sort-direction="defaultSortDirection")
 
 		template(slot-scope="user")
 			b-table-column
 				span
 					i.fas.fa-eye(@click="viewUser(user.row)")
-			b-table-column(label="ID", field="user_id", width="40px", sortable, numeric)
+			b-table-column(label="ID", field="user_id", width="40px", sortable, numeric, centered)
 				span {{user.row.user_id}}
-			b-table-column(label="First Name", field="user_fname", width="40px", sortable)
+			b-table-column(label="First Name", field="user_fname", width="40px", sortable, centered)
 				span {{user.row.user_fname}}
-			b-table-column(label="Last Name", field="user_lname", sortable)
+			b-table-column(label="Last Name", field="user_lname", sortable, centered)
 				span {{user.row.user_lname}}
-			b-table-column(label="Email", field="user_email", sortable)
+			b-table-column(label="Email", field="user_email", sortable, centered)
 				span {{user.row.user_email}}
-			b-table-column(label="Role", field="user_role", sortable)
+			b-table-column(label="Role", field="user_role", sortable, centered)
 				span {{user.row.user_role}}
-			b-table-column(label="Status")
-				span(v-if="user.row.user_isdel==1") Inactive
-				span(v-else) Active
-			b-table-column(label="Action", centered)
+			b-table-column(label="Status", centered)
+				p(v-if="user.row.user_isdel==1") Inactive
+				p(v-else) Active
+			b-table-column(label="Action", centered, style="width:250px")
 				template(v-if="user.row.user_isdel==1")
 					button#buttonAD.button.is-success(@click="deleteUser(user.row)").fas.fa-eye Activate
-					b-tooltip(label="Activate user to edit.", position="is-bottom", type="is-light")
-						button.button.is-warning#buttonVE(@click="editUser(user.row)", disabled).fas.fa-edit Edit
+					button.button.is-warning#buttonVE(disabled).fas.fa-edit Edit
 				template(v-else)
 					button#buttonAD.button.is-danger(@click="deleteUser(user.row)").fas.fa-eye-slash Deactivate
 					button.button.is-warning#buttonVE(@click="editUser(user.row)").fas.fa-edit Edit
@@ -80,25 +79,16 @@ export default {
 
 #buttonVE {
 	width: 80px;
-	text-align: center;
-	display: inline-block;
 	size: small;
-	margin-inline-start: 5px
 }
 
 #buttonAD {
 	width: 110px;
 	size: small;
-	text-align: center;
-	display: inline-block;
-}
-
-b-colum-table{
-	text-align:center;
 }
 
 #tableSize{
-  width: 80%;
+  width: 85%;
   margin: auto;
 }
 

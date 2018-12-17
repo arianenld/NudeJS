@@ -1,9 +1,9 @@
 <template lang="pug">
 	section
-		b-modal#modal1(hide-footer=true, ref="editUserRef", header-bg-variant="dark", :active.sync="showEditModal")
+		b-modal#modal1(hide-footer=true, ref="editUserRef",:active.sync="showEditModal")
 			.card
 				form(@submit.prevent="saveUser")
-					.modal-card
+					.modal-card.is-dark
 						header.modal-card-head
 							p.modal-card-title(v-if="userInfo.user_id") Edit user ID # {{userInfo.user_id}}
 							p.modal-card-title(v-else) Add new user
@@ -14,15 +14,16 @@
 							div(v-if="$v.userInfo.user_fname.$dirty")
 							p#error(v-if="!$v.userInfo.user_fname.required") *Please fill out missing fields.
 							p#error(v-else-if="!$v.userInfo.user_fname.min") *Minimum of three (3) characters.
-							p#error(v-else-if="!$v.userInfo.user_fname.nameSyntax") *Numeric and special characters are not allowed.
-							p#error(v-else-if="!$v.userInfo.user_fname.whiteSpaces") *Two or more consecutive spaces are not allowed.
+							p#error(v-else-if="!$v.userInfo.user_fname.alpha") *Numeric and special characters are not allowed.
+							p#error(v-else-if="!$v.userInfo.user_fname.whiteSpaces") *Double spacing is not allowed.
 
 							b-field(label="Last Name")
 								b-input(type="text", v-model="userInfo.user_lname")
 							div(v-if="$v.userInfo.user_lname.$dirty")
 							p#error(v-if="!$v.userInfo.user_lname.required") *Please fill out missing fields.
 							p#error(v-else-if="!$v.userInfo.user_lname.min") *Minimum of three (3) characters.
-							p#error(v-else-if="!$v.userInfo.user_lname.nameSyntax") *Numeric and special characters are not allowed.
+							p#error(v-else-if="!$v.userInfo.user_lname.alpha") *Numeric and special characters are not allowed.
+							p#error(v-else-if="!$v.userInfo.user_lname.whiteSpaces") *Double spacing is not allowed.
 
 							b-field(label="Email")
 								b-input(type="text", v-model="userInfo.user_email")
@@ -37,6 +38,7 @@
 							div(v-if="$v.userInfo.user_role.$dirty")
 							p#error(v-if="!$v.userInfo.user_role.required") *Please fill out missing fields.
 							p#error(v-if="!$v.userInfo.user_role.min") *Minimum of three (2) characters.
+							p#error(v-else-if="!$v.userInfo.user_role.whiteSpaces") *Double spacing is not allowed.
 
 							div
 								button.button.is-dark(@click.prevent="hideModal") Cancel
@@ -45,29 +47,33 @@
 
 </template>
 <script>
-import {required, minLength, email} from "vuelidate/lib/validators"
+import {required, minLength, email, alpha} from "vuelidate/lib/validators"
 const nameSyntax = value => {
     if (typeof value === 'undefined' || value === null || value === '') {
         return true
     }
-    return /^[a-zA-Z\s!\s*/]*$/.test(value)
+    //return /^[a-zA-Z\s!\s*/]*$/.test(value)
+    //return /^.*\s{2,}.*$/.text(value) whitespaces
+    ///^(\w+\s)*\w+$/
+     return /^[a-z\d\-_\s]+$/i.test(value)
 }
 
-const whiteSpaces = value =>{
-  if (typeof value === undefined || value === null ||  value === ''){
-    return true
-  }
-  return /^.*\s{2,}.*$/.text(value)
+const whiteSpaces = value => {
+  if (typeof value === 'undefined' || value === null || value === '') {
+        return true
+    }
+  return /^(\w+\s)*\w+$/i.test(value)
 }
+
 
 export default {
   props: ['userInfo'],
   validations: {
     userInfo: {
-      user_fname: {required, min: minLength(3), nameSyntax, whiteSpaces},
-      user_lname: {required, min: minLength(3), nameSyntax, whiteSpaces},
+      user_fname: {required, min: minLength(3), alpha, whiteSpaces},
+      user_lname: {required, min: minLength(3), alpha, whiteSpaces},
       user_email: {required, email},
-      user_role: {required, min: minLength(2)}
+      user_role: {required, min: minLength(2), whiteSpaces}
 	}
   },
   data(){

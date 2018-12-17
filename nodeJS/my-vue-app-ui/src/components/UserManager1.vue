@@ -1,17 +1,4 @@
  <template lang="pug">
-	//section.container
-		b-table
-			thead
-				tr
-					th
-						h1(align="left") CHOOSE ACTION
-					th
-						form(@submiit.prevebt="searchUser")
-						b-nav-form(align="center")
-							b-input(style="margin-right: 10px; margin-left:500px; float:right", type="text"
-						v-model="search", v-on:keyup="searchUser(search)", placeholder="Search", name="search")
-					th
-						button.button-success(style="margin-right:10px; float:right", type="submit", size="sm", @click="addUser")
 	section.container
 		br
 		.columns
