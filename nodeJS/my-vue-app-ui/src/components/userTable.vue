@@ -4,7 +4,7 @@ section#tableSize
 			:paginated="isPaginated",
             :per-page="perPage"
             :current-page.sync="currentPage",
-            pagination-simple,
+
             :default-sort-direction="defaultSortDirection")
 
 		template(slot-scope="user")
