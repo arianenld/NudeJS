@@ -105,7 +105,8 @@ export default {
       }
       this.displayModel = {
           id: user.user_id,
-          user_fname: user.user_fname
+          user_fname: user.user_fname,
+          user_isdel: user.user_isdel
       }
       this.$refs.deleteUserRef.showModal()
       // if we are editing a user we deleted, remove it from the form

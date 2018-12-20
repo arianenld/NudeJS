@@ -22,8 +22,8 @@ section#tableSize
 			b-table-column(label="Role", field="user_role", sortable, centered)
 				span {{user.row.user_role}}
 			b-table-column(label="Status", centered)
-				p(v-if="user.row.user_isdel==1") Inactive
-				p(v-else) Active
+				span(v-if="user.row.user_isdel==1") Inactive
+				span(v-else) Active
 			b-table-column(label="Action", centered, style="width:250px")
 				template(v-if="user.row.user_isdel==1")
 					button#buttonAD.button.is-success(@click="deleteUser(user.row)").fas.fa-eye Activate

@@ -1,6 +1,6 @@
 <template lang="pug">
 	section
-		b-modal#deleteUserModal(hide-footer=true, ref="deleteUserModalRef", :active.async="showDeleteModal")
+		b-modal#deleteUserModal(hide-footer=true, :active.async="showDeleteModal")
 			.card
 				form(@submit.prevent="deleteUser")
 					.modal-card
@@ -25,6 +25,15 @@ export default {
 
   methods: {
     deleteUser (){
+      console.log("bgtf")
+      console.log(this.userInfo.user_isdel)
+      if(this.userInfo.user_isdel == 0){
+        console.log("")
+        this.$toast.open('User deactivated.')
+      }
+      else{
+        this.$toast.open('User activated.')
+      }
       this.hideModal()
       this.$emit('deleteUser')
     },

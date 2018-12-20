@@ -1,6 +1,6 @@
 <template lang="pug">
 	section
-		b-modal#modal2(hide-footer=true, ref="viewUserRef", :active.sync="showViewModal")
+		b-modal#modal2(hide-footer=true, :active.sync="showViewModal")
 			.card
 				.modal-card
 					header.modal-card-head

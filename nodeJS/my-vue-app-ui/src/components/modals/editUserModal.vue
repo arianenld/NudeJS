@@ -12,33 +12,33 @@
 							b-field(label="First Name")
 								b-input(type="text", v-model="userInfo.user_fname")
 							div(v-if="$v.userInfo.user_fname.$dirty")
-							p#error(v-if="!$v.userInfo.user_fname.required") *Please fill out missing fields.
-							p#error(v-else-if="!$v.userInfo.user_fname.min") *Minimum of three (3) characters.
-							p#error(v-else-if="!$v.userInfo.user_fname.alpha") *Numeric and special characters are not allowed.
-							p#error(v-else-if="!$v.userInfo.user_fname.whiteSpaces") *Double spacing is not allowed.
+								p#error(v-if="!$v.userInfo.user_fname.required") *Please fill out missing fields.
+								p#error(v-else-if="!$v.userInfo.user_fname.min") *Minimum of three (3) characters.
+								p#error(v-else-if="!$v.userInfo.user_fname.alpha") *Numeric and special characters are not allowed.
+								p#error(v-else-if="!$v.userInfo.user_fname.whiteSpaces") *Double spacing is not allowed.
 
 							b-field(label="Last Name")
 								b-input(type="text", v-model="userInfo.user_lname")
 							div(v-if="$v.userInfo.user_lname.$dirty")
-							p#error(v-if="!$v.userInfo.user_lname.required") *Please fill out missing fields.
-							p#error(v-else-if="!$v.userInfo.user_lname.min") *Minimum of three (3) characters.
-							p#error(v-else-if="!$v.userInfo.user_lname.alpha") *Numeric and special characters are not allowed.
-							p#error(v-else-if="!$v.userInfo.user_lname.whiteSpaces") *Double spacing is not allowed.
+								p#error(v-if="!$v.userInfo.user_lname.required") *Please fill out missing fields.
+								p#error(v-else-if="!$v.userInfo.user_lname.min") *Minimum of three (3) characters.
+								p#error(v-else-if="!$v.userInfo.user_lname.alpha") *Numeric and special characters are not allowed.
+								p#error(v-else-if="!$v.userInfo.user_lname.whiteSpaces") *Double spacing is not allowed.
 
 							b-field(label="Email")
 								b-input(type="text", v-model="userInfo.user_email")
 							div(v-if="$v.userInfo.user_email.$dirty")
-							p#error(v-if="!$v.userInfo.user_email.required") *Please fill out missing fields.
-							p#error(v-else-if="!$v.userInfo.user_email.email") *Please enter valid email.
+								p#error(v-if="!$v.userInfo.user_email.required") *Please fill out missing fields.
+								p#error(v-else-if="!$v.userInfo.user_email.email") *Please enter valid email.
 							template(slot-scope="user")
 								p#error(v-if="!v.user.user_email == userInfo.user_email") *Email address already taken.
 
 							b-field(label="Role")
 								b-input(type="text", v-model="userInfo.user_role")
 							div(v-if="$v.userInfo.user_role.$dirty")
-							p#error(v-if="!$v.userInfo.user_role.required") *Please fill out missing fields.
-							p#error(v-if="!$v.userInfo.user_role.min") *Minimum of three (2) characters.
-							p#error(v-else-if="!$v.userInfo.user_role.whiteSpaces") *Double spacing is not allowed.
+								p#error(v-if="!$v.userInfo.user_role.required") *Please fill out missing fields.
+								p#error(v-if="!$v.userInfo.user_role.min") *Minimum of three (2) characters.
+								p#error(v-else-if="!$v.userInfo.user_role.whiteSpaces") *Double spacing is not allowed.
 
 							div
 								button.button.is-dark(@click.prevent="hideModal") Cancel
@@ -88,6 +88,7 @@ export default {
 
       this.$emit('saveUser')
       this.hideModal()
+      this.$toast.open('Action success!')
     },
     showModal () {
 	  //this.$refs.editUserRef.show()
@@ -95,6 +96,7 @@ export default {
     },
 
     hideModal () {
+      this.$v.userInfo.$reset()
       this.showEditModal = false
     }
   }
